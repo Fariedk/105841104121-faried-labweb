@@ -1,29 +1,25 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
+import logo from './assets/Sabo1.png'
 
 const App = () => {
   return (
-    <View style={{
-      flex: 1,
-      backgroundColor : 'white',
-    }}>
-        <View style={{
-         flex:1, justifyContent: 'flex-end', alignItems: 'center', backgroundColor: 'white'
-        }}>
-          <View style={{
-            width: 100,height: 100, backgroundColor: 'red'
-          }}>
-            </View>
-          </View>
-        <View style={{
-          flex: 1, justifyContent: 'flex-start', alignItems: 'center', backgroundColor: 'white'
-        }}>
-          <View style={{
-            width: 100, height: 100, backgroundColor: 'blue'
-          }}>
-          </View>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ fontSize: 30, marginBottom: 50 }}>Welcome!</Text>
+      <Image
+        source={logo}
+        style={{ width: 200, height: 150, marginBottom: 100 }}
+        />
+        
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '80%'}}>
+        <View style={{ width: '45%', height: 50, backgroundColor: 'red',borderRadius:15, alignItems:'center', justifyContent:'center'}}>
+          <Text style={{color:'white'}}>Sign Up</Text>
         </View>
+        <View style={{ width: '45%', height: 50, backgroundColor: 'green', borderRadius:15, alignItems:'center', justifyContent:'center'}}>
+          <Text style={{color:'white'}}>Login</Text>
         </View>
+      </View>
+    </View>
   )
 }
 
