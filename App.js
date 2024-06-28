@@ -1,37 +1,25 @@
-import { StyleSheet, Text, View, Image, TextInput } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, Button } from 'react-native'
 import React from 'react'
-import logo from './assets/Sabo1.png'
+import { useFonts } from 'expo-font'
+//import logo from './assets/Sabo1.png'
 
-const ButtonCustom = ({text, color}) => {
-  return (
-    <View style={{ backgroundColor: color, width: 250, height: 100, borderRadius: 15, justifyContent: 'center', marginBottom: 10 }}>
-      <Text style={{ textAlign: 'center', color: 'black', fontSize: 25, fontWeight: 'bold' }}>
-          {text}
-        </Text>
-    </View>
-  )
-}
-
-const TextInputCustom = ({placeholder, color, typeKeyboard}) => {
-  return (
-    <TextInput
-      placeholder={placeholder}
-      keyboardType={typeKeyboard}
-      style={{ width: 250, height: 50, borderColor: color, borderWidth: 3, borderRadius: 15, marginBottom: 10, paddingLeft: 10 }}
-    />
-  )
-}
 const App = () => {
+  const [fontloaded] = useFonts({
+    MetropolisBlack: require('./assets/fonts/Metropolis-Black.otf'),
+    MetropolisBold: require('./assets/fonts/Metropolis-Bold.otf'),
+    MetropolisLight: require('./assets/fonts/Metropolis-Light.otf'),
+    MetropolisSemiBold: require('./assets/fonts/Metropolis-SemiBold.otf'),
+  })
+  if (!fontloaded) {
+    return <Text>font tidak ditemukan</Text>
+  }
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <View>
-        <TextInputCustom placeholder='Enter your name' color='red' />
-        <TextInputCustom placeholder='Enter your age' color='blue' typeKeyboard='numeric' />
-      </View>
-      
+    <View style = {{flex : 1, alignItems : 'center', justifyContent : 'center'}}>
+      <Text style = {{fontFamily: 'MetropolisBlack', fontSize : 20}}>Metropolisblak</Text>
+      <Text style = {{fontFamily: 'Metropolisbold', fontSize : 20}}>MetropolisBold</Text>
+      <Text style = {{fontFamily: 'Metropolislight', fontSize : 20}}>MetropolisLight</Text>
+      <Text style = {{fontFamily: 'MetropolisSemiBold', fontSize : 20}}>MetropolisSemiBold</Text>
     </View>
   )
 }
-
-
 export default App
