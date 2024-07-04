@@ -26,7 +26,7 @@ function App() {
         {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
         <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
         <Stack.Screen name="LoginPage" component={LoginPage} options={{headerShown:false}} />
-        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown:false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

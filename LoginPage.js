@@ -39,8 +39,12 @@ const login = () => {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff', padding: 16 }}>
-
         <View style ={{ width: '100%', alignItems: 'flex-start', marginBottom: -10 }}>
+        <TouchableOpacity
+            onPress={() => navigation.navigate('SignUp')}
+        >
+            <Image source={require('./assets/Chevron.png')} style={{ width: 24, height: 24, marginTop: 50 }}/>
+        </TouchableOpacity>
             <Text style={{ fontSize: 50, fontFamily: 'MetroBold', marginBottom: 16, marginTop: 50 }}>
                 Login</Text>
         </View>

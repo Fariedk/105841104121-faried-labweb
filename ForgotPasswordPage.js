@@ -1,6 +1,7 @@
-import { Text, View, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, TextInput, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
 import { useFonts } from 'expo-font';
+import { useNavigation } from "@react-navigation/native";
 
 const ButtonCustom = ({ text, color, onPress }) => {
     return (
@@ -32,6 +33,7 @@ const TextInputCustom = ({ placeholder, color, typeKeyboard, value, onChangeText
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
+    const navigation = useNavigation();
 
     const validateEmail = () => {
         // Basic email validation
@@ -57,8 +59,10 @@ const ForgotPassword = () => {
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff', padding: 16,
         }}>
             <View style={{ width: '100%', alignItems: 'flex-start', marginBottom: 24, paddingLeft: '10%' }}>
-                <TouchableOpacity>
-                    <Text style={{ fontSize: 16, color: 'black' }}>{'<'}</Text>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('LoginPage')}
+                    >
+                    <Image source={require('./assets/Chevron.png')} style={{ width: 24, height: 24 }}/>
                 </TouchableOpacity>
             </View>
             <View style={{ width: '100%', alignItems: 'flex-start', paddingLeft: '10%', marginBottom: 16}}>
