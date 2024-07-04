@@ -1,6 +1,7 @@
 import { Text, View, TouchableOpacity, Image, TextInput} from 'react-native'
 import React from 'react'
 import { useFonts } from 'expo-font'
+import { useNavigation } from '@react-navigation/native';
 
 const ButtonCustom = ({ text, color }) => {
     return (
@@ -28,11 +29,13 @@ const TextInputCustom = ({ placeholder, color, typeKeyboard, secureTextEntry = f
 const login = () => {
     const [dapatFont]=useFonts({
         'MetroBold': require('./assets/fonts/Metropolis-Bold.otf'),
-        'MetroMedium': require('./assets/fonts/Metropolis-Medium.otf'),
+        'MetroLight': require('./assets/fonts/Metropolis-Light.otf'),
       });
       if (!dapatFont){
         return <Text>Font tidak di temukan...</Text>
       }
+
+      const navigation = useNavigation();
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff', padding: 16 }}>
@@ -45,7 +48,9 @@ const login = () => {
             <TextInputCustom placeholder="Email" color="gray" typeKeyboard="email-address" />
             <TextInputCustom placeholder="Password" color="gray" typeKeyboard="default" secureTextEntry={true} />
 
-            <TouchableOpacity>
+            <TouchableOpacity 
+                onPress={() => navigation.navigate('ForgotPassword')}
+            >
                 <Text style={{ color: 'red', marginBottom: 20,}}>
                     Forgot Password?</Text>
             </TouchableOpacity>

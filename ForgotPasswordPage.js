@@ -46,7 +46,7 @@ const ForgotPassword = () => {
 
     const [fontsLoaded] = useFonts({
         'MetroBold': require('./assets/fonts/Metropolis-Bold.otf'),
-        'MetroMedium': require('./assets/fonts/Metropolis-Medium.otf'),
+        'MetroLight': require('./assets/fonts/Metropolis-Light.otf'),
     });
 
     if (!fontsLoaded) {
