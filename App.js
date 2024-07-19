@@ -1,18 +1,56 @@
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, Image, TouchableOpacity, TouchableOpacityBase } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginPage from './LoginPage';
-import ForgotPassword from './ForgotPasswordPage';
-// import signUn from './signUp';
-import SignUp from './SignUp';
+import ShopPage from './Menu/ShopPage';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeAktif from './assets/icon/home-activated.png';
+import HomeInaktif from './assets/icon/home-inactive.png';
+import Shop from './assets/icon/shop-activated.png'
+import ShopInaktif from './assets/icon/shop-inactive.png'
 
 
-function HomeScreen() {
+const Tab = createBottomTabNavigator();
+function MyTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          headerShown: false, tabBarIcon: ({ focused }) => (
+            <Image
+              source={focused ? HomeAktif : HomeInaktif}
+              style={{ width: 40, height: 40 }}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Shop"
+        component={ShopPage}
+        options={{
+          headerShown: false, tabBarIcon: ({ focused }) => (
+            <Image
+              source={focused ? Shop : ShopInaktif}
+              style={{ width: 40, height: 40 }}
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
+
+function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button title='Go to Login' onPress={() => navigation.navigate('LoginPage')} />
+      <Button
+        title="Go to Login"
+        onPress={() => navigation.navigate('Login')}
+      />
     </View>
   );
 }
@@ -23,10 +61,11 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-        <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
-        <Stack.Screen name="LoginPage" component={LoginPage} options={{headerShown:false}} />
-        <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown:false}} />
+        <Stack.Screen name="Home" component={MyTabs} options={{headerShown:false}} />
+        <Stack.Screen name="Login" component={LoginPage} />
+        <Stack.Screen name="Shop" component={ShopPage} />
+        
+        
       </Stack.Navigator>
     </NavigationContainer>
   );
