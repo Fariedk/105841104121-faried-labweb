@@ -1,128 +1,99 @@
-import { StyleSheet, Text, View, TextInput, Button, Image } from 'react-native';
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { Component } from 'react';
+import { Text, View, SafeAreaView, Image, ScrollView } from 'react-native';
 
-const LoginSimak = () => {
-  const [data, setData] = useState({
-    nim: '',
-    password: ''
-  });
-  const [userData, setUserData] = useState(null);
-  const [error, setError] = useState('');
 
-  const onSubmit = () => {
-    axios.post('https://api.beasiswa.unismuh.ac.id/api/login', {
-      username: data.nim,
-      password: data.password
-    })
-      .then(response => {
-        if (response.status === 200) {
-          setUserData(response.data.data);
-          setError('');
-        }
-      })
-      .catch(error => {
-        console.log(error);
-        setError('Ada kesalahan. Silahkan cek kembali nim dan password anda.');
-        setUserData(null);
-      });
-  }
+class Shop extends Component {
+    render() {
+        const mainImage = require('./assets/banner.png');
+        const newImages = [
+            { source: require('./assets/edress.png'), title: 'Evening Dress', subtitle: '12$' },
+            { source: require('./assets/sdress.png'), title: 'Sport Dress', subtitle: '39$' },
+            { source: require('./assets/blouse.png'), title: 'Sundress', subtitle: '21$' },
+            { source: require('./assets/c1.png'), title: 'T-Shirt', subtitle: '19$' },
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          onChangeText={(value) => setData({ ...data, nim: value })}
-          placeholder="Nim"
-          placeholderTextColor="#aaa"
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={(value) => setData({ ...data, password: value })}
-          placeholder="Password"
-          placeholderTextColor="#aaa"
-          secureTextEntry
-        />
-        <Button title="Login" onPress={onSubmit} />
-        {error ? <Text style={styles.errorText}>{error}</Text> : null}
-      </View>
-      {userData && (
-        <View style={styles.userDataContainer}>
-          <Text style={styles.userDataText}>ID: {userData.id}</Text>
-          <Text style={styles.userDataText}>Username: {userData.username}</Text>
-          <Text style={styles.userDataText}>Name: {userData.nama}</Text>
-          <Text style={styles.userDataText}>Role: {userData.role}</Text>
-          <Image
-            style={styles.userImage}
-            source={{ uri: `https://simakad.unismuh.ac.id/upload/mahasiswa/${userData.username}.jpg` }}
-          />
-        </View>
-      )}
-    </View>
-  );
+            
+        ];
+        const twoimage = [
+            { source: require('./assets/shirt.png'), title: 'Shirt', subtitle: '29$' },
+            { source: require('./assets/tshirt.png'), title: 'T-Shirt', subtitle: '19$' },
+            { source: require('./assets/c4.png'), title: 'Necklace', subtitle: '115$' },
+            { source: require('./assets/c2.png'), title: 'Jeans', subtitle: '125$' },
+        ];
+
+        return (
+            <SafeAreaView style={{
+                flex: 1,backgroundColor: '#ffffff',
+            }}>
+                <ScrollView>
+                    <View style={{position: 'relative',}}>
+                        <Image source={mainImage} style={{width: '100%',height: 200,resizeMode: 'cover',}} />
+                        <View style={{
+                            position: 'absolute',
+                            buttom: 40,
+                            left: 20,
+                            right: 20,
+                            alignItems: 'flex-start',
+                            marginTop: 120,
+                    
+                        }}>
+                            <Text style={{
+                                color: '#ffffff',
+                                fontSize: 40,
+                                fontWeight: 'bold',
+                            }}>Street Clothes</Text>
+            
+                        </View>
+                    </View>
+                    <View style={{padding: 20,}}>
+                        <Text style={{fontSize: 24,fontWeight: 'bold',}}>Sale</Text>
+                        <Text style={{
+                            color: '#888888',
+                            marginVertical: 10,
+                            fontSize: 20,
+                        }}>You've never seen it before!</Text>
+                        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{flexDirection: 'row',}}>
+                            {newImages.map((item, index) => (
+                                <View key={index} style={{marginRight: 16, alignItems: 'center',}}>
+                                    <Image source={item.source} style={{
+                                        width: 150,
+                                        height: 200,
+                                        resizeMode: 'cover',
+                                        borderRadius: 10,
+                                
+                                    }} />
+                                    <Text style={{fontSize: 14, fontWeight: 'bold', marginTop: 5,}}>{item.title}</Text>
+                                    <Text style={{fontSize: 15, color: 'red',}}>{item.subtitle}</Text>
+                                </View>
+                            ))}
+                        </ScrollView>
+                    </View>
+                    <View style={{padding: 20,}}>
+                        <Text style={{fontSize: 24,fontWeight: 'bold',}}>New</Text>
+                        <Text style={{
+                            color: '#888888',
+                            marginVertical: 10,
+                            fontSize: 20,
+                        }}>You've never seen it before!</Text>
+                        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{flexDirection: 'row',}}>
+                            {twoimage.map((item, index) => (
+                                <View key={index} style={{marginRight: 16, alignItems: 'center',}}>
+                                    <Image source={item.source} style={{
+                                        width: 150,
+                                        height: 200,
+                                        resizeMode: 'cover',
+                                        borderRadius: 10,
+                                
+                                    }} />
+                                    <Text style={{fontSize: 14, fontWeight: 'bold', marginTop: 5,}}>{item.title}</Text>
+                                    <Text style={{fontSize: 15, color: 'red',}}>{item.subtitle}</Text>
+                                </View>
+                            ))}
+                        </ScrollView>
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
+        );
+    }
 }
 
-export default LoginSimak;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-    padding: 20,
-  },
-  inputContainer: {
-    width: '100%',
-    maxWidth: 400,
-    padding: 20,
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-    marginBottom: 20,
-  },
-  input: {
-    height: 50,
-    borderColor: '#ddd',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 20,
-    paddingHorizontal: 10,
-    fontSize: 16,
-    color: '#333',
-  },
-  errorText: {
-    color: 'red',
-    marginTop: 10,
-    textAlign: 'center',
-  },
-  userDataContainer: {
-    width: '100%',
-    maxWidth: 400,
-    padding: 20,
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-    alignItems: 'center',
-  },
-  userDataText: {
-    fontSize: 16,
-    color: '#333',
-    marginBottom: 5,
-  },
-  userImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    marginTop: 10,
-  },
-});
+export default Shop;

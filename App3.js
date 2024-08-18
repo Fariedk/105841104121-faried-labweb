@@ -7,6 +7,7 @@ import ShopPage from './Menu/ShopPage';
 import BagPage from './Menu/BagPage';
 import FavoritePage from './Menu/FavoritePage';
 import ProfilePage from './Menu/ProfilePage';
+import homePage from './Menu/homePage';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeAktif from './assets/icon/home-activated.png';
 import HomeInaktif from './assets/icon/home-inactive.png';
@@ -18,6 +19,7 @@ import Favorite from './assets/icon/favorites-activated.png'
 import FavoriteInaktif from './assets/icon/favorites-inactive.png'
 import Profile from './assets/icon/profil-activated.png'
 import ProfileInaktif from './assets/icon/profil-inactive.png'
+import Home from './Menu/homePage';
 
 
 
@@ -32,6 +34,18 @@ function MyTabs() {
           headerShown: false, tabBarIcon: ({ focused }) => (
             <Image
               source={focused ? HomeAktif : HomeInaktif}
+              style={{ width: 40, height: 40 }}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Home"
+        component={homePage}
+        options={{
+          headerShown: false, tabBarIcon: ({ focused }) => (
+            <Image
+              source={focused ? Home : HomeInaktif}
               style={{ width: 40, height: 40 }}
             />
           ),
